@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -111,7 +111,7 @@ public class LifeIterationScript : MonoBehaviour {
 	void Activate () {
 		Log("Cell color reference:\n◼ = Black\n◻ = White");
 		
-		Iderator.text = Random.Range(2,6).ToString();
+		Iderator.text = Random.Range(2,5).ToString();
 		IderationAmount = Int32.Parse(Iderator.text);
 		
 		updateDebug("Initial state");
