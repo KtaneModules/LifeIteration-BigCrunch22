@@ -41,7 +41,7 @@ public class LifeIterationScript : MonoBehaviour {
 	private static int moduleIdCounter = 1;
 	private int moduleId = 0;
 	
-	int IderationAmount;
+	int IterationAmount, IterationCount;
 
 
 	/////////////////////////////////////////////////// Initial Setup ///////////////////////////////////////////////////////
@@ -112,17 +112,23 @@ public class LifeIterationScript : MonoBehaviour {
 		Log("Cell color reference:\n◼ = Black\n◻ = White");
 		
 		Iderator.text = Random.Range(2,5).ToString();
-		IderationAmount = Int32.Parse(Iderator.text);
+		IterationAmount = Int32.Parse(Iderator.text);
 		
 		updateDebug("Initial state");
 
 		updateSquares();
 		
-		Debug.LogFormat("[Life Iteration #{0}] Amount of iterations: {1}", moduleId, IderationAmount.ToString());
+		Debug.LogFormat("[Life Iteration #{0}] Amount of iterations: {1}", moduleId, IterationAmount.ToString());
 
-		simulateGeneration();
-		updateDebug("Solution");
-		updateReset();
+		for (int x = 0; x < IterationAmount; x++)
+		{
+			IterationCount++;
+			simulateGeneration();
+			Debug.LogFormat("[Life Iteration #{0}] ------------------------------------------", moduleId);
+			updateDebug("Iteration " + IterationCount.ToString());
+			updateReset();
+		}
+		Debug.LogFormat("[Life Iteration #{0}] ------------------------------------------", moduleId);
 
 		isActive = true;
 	}
@@ -211,7 +217,7 @@ public class LifeIterationScript : MonoBehaviour {
 
 	void simulateGeneration()
 	{
-		for (int x = 0; x < IderationAmount; x++)
+		for (int x = 0; x < IterationCount; x++)
 		{
 			// process the generation
 			// store square color value
@@ -389,7 +395,7 @@ public class LifeIterationScript : MonoBehaviour {
 			Module.HandlePass ();
 			isSolved = true;
 		}
-
+		Debug.LogFormat("[Life Iteration #{0}] ------------------------------------------", moduleId);
 		yield return false;
 	}
 
